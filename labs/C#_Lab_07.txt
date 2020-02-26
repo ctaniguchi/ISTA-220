@@ -1,0 +1,71 @@
+using System;
+
+namespace Classes
+{
+    class Program
+    {
+        static void doWork()
+        {
+            Point origin = new Point();
+            Point bottomRight = new Point(1366, 768);
+            double distance = origin.DistanceTo(bottomRight);
+            Console.WriteLine($"Distance is: {distance}");
+            Point maxwell = new Point(1, 1);
+            Point christy = new Point(4, 5);
+            distance = maxwell.DistanceTo(christy);
+            Console.WriteLine($"Distance is: {distance}");
+            Console.WriteLine($"Number of Point objects: {Point.ObjectCount()}." +
+                $" This is the value of objectCount.");
+        }
+
+        static void Main(string[] args)
+        {
+            try
+            {
+                doWork();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+    }
+}
+
+using System;
+
+namespace Classes
+{
+    class Point
+    {
+        private int _x = 0;
+        private int _y = 0;
+        private static int objectCount = 0;
+        public Point()
+        {
+            Console.WriteLine("Default constructor called");
+            _x = -1;
+            _y = -1;
+            objectCount++;
+        }
+        public Point(int x, int y)
+        {
+            Console.WriteLine($"x:{x}, y:{y}");
+            _x = x;
+            _y = y;
+            objectCount++;
+        }
+
+        public double DistanceTo(Point other)
+        {
+            int xDiff = _x - other._x;
+            int yDiff = _y - other._y;
+            double distance = Math.Sqrt((xDiff * xDiff) + (yDiff * yDiff));
+            return distance;
+        }
+        public static int ObjectCount()
+        {
+            return objectCount;
+        }
+    }
+}
